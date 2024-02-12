@@ -2,7 +2,6 @@
 - name: Shutdown Ubuntu Server
   hosts: all
   become: true
-  become_method: sudo
 
   tasks:
     - name: Ensure the system is up-to-date
