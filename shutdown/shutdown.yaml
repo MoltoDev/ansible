@@ -1,11 +1,10 @@
 ---
-- name: Shutdown all Ubuntu servers
-  hosts: all
-  become: yes  # This enables privilege escalation (sudo)
-
+- hosts: shutdown
+  gather_facts: no
   tasks:
-    - name: Shut down the servers
-      shutdown:
-        msg: "Shutting down the system"
-        state: poweredoff
-      become: yes
+    - name: shutdown
+      command: /sbin/shutdown -h now
+      sudo: yes
+
+    - name: wait go down
+      local_action: wait_for host={{ ansible_ssh_host }} port=22 state=stopped
