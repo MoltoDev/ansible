@@ -5,7 +5,7 @@
 
   tasks:
     - name: Shut down the servers
-      shell: shutdown -h now
+      shell: sudo shutdown -h now
       become: yes
       register: shutdown_result
 
