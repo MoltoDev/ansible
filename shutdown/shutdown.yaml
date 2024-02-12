@@ -8,7 +8,13 @@
       apt:
         update_cache: yes
       become: yes
+      serial: 1  # Set serial to 1 to update servers one at a time
 
     - name: Shut down the servers
-      command: shutdown -h now
+      shell: shutdown -h now
       become: yes
+      register: shutdown_result
+
+    - name: Display shutdown command output
+      debug:
+        var: shutdown_result.stdout_lines
