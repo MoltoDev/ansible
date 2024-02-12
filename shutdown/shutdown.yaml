@@ -1,5 +1,5 @@
 ---
-- name: Shutdown all Ubuntu servers
+- name: Update Ubuntu servers
   hosts: all
   become: yes  # This enables privilege escalation (sudo)
 
@@ -8,8 +8,12 @@
       apt:
         update_cache: yes
       become: yes
-      serial: 1  # Set serial to 1 to update servers one at a time
 
+- name: Shutdown all Ubuntu servers
+  hosts: all
+  become: yes  # This enables privilege escalation (sudo)
+
+  tasks:
     - name: Shut down the servers
       shell: shutdown -h now
       become: yes
