@@ -1,0 +1,14 @@
+---
+- name: Shutdown all Ubuntu servers
+  hosts: all
+  become: yes  # This enables privilege escalation (sudo)
+
+  tasks:
+    - name: Ensure the servers are up-to-date
+      apt:
+        update_cache: yes
+      become: yes
+
+    - name: Shut down the servers
+      command: shutdown -h now
+      become: yes
