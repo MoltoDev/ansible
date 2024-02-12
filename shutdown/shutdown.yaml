@@ -1,7 +1,8 @@
 ---
 - name: Shutdown Ubuntu Server
   hosts: all
-  become: yes
+  become: true
+  become_method: su
 
   tasks:
     - name: Ensure the system is up-to-date
