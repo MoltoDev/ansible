@@ -5,10 +5,7 @@
 
   tasks:
     - name: Shut down the servers
-      shell: sudo shutdown -h +1
+      shutdown:
+        msg: "Shutting down the system"
+        state: poweredoff
       become: yes
-      register: shutdown_result
-
-    - name: Display shutdown command output
-      debug:
-        var: shutdown_result
