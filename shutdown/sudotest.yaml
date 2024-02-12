@@ -1,0 +1,14 @@
+---
+- name: Test sudo
+  hosts: all
+  become: yes  # This enables privilege escalation (sudo)
+
+  tasks:
+    - name: Run a command with sudo
+      command: whoami
+      become: yes
+      register: sudo_test_result
+
+    - name: Display sudo test result
+      debug:
+        var: sudo_test_result.stdout_lines
