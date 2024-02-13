@@ -11,6 +11,10 @@
           Origin: "https://localhost"
       register: response
 
+    - name: Debug response
+      debug:
+        var: response
+
     - name: Check response status
       fail:
         msg: "HTTP request failed or did not receive 'Yarp' status."
