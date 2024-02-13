@@ -7,6 +7,8 @@
       uri:
         url: https://192.168.10.147:2096/api/test
         method: GET
+        headers:
+          Origin: "https://localhost"
       register: response
 
     - name: Check response status
