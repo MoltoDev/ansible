@@ -1,6 +1,6 @@
 ---
 - name: Check HTTP response
-  hosts: localhost
+  hosts: all
   gather_facts: false
   tasks:
     - name: Make HTTP request
