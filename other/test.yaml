@@ -9,11 +9,8 @@
         method: GET
         headers:
           Origin: "https://localhost"
+        validate_certs: no  # Ignore certificate errors
       register: response
-
-    - name: Debug response
-      debug:
-        var: response
 
     - name: Check response status
       fail:
