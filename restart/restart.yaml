@@ -10,3 +10,16 @@
 
     - name: Restart the server
       command: shutdown -r now
+      async: 0
+      poll: 0
+      ignore_errors: yes
+      become: yes
+      tags:
+        - restart
+
+    - name: Wait for the server to come back online
+      wait_for_connection:
+        timeout: 300
+      become: yes
+      tags:
+        - restart
