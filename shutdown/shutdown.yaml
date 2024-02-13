@@ -8,5 +8,8 @@
       apt:
         update_cache: yes
 
+    - name: Delay for 10 seconds before shutdown
+      command: sleep 10
+
     - name: Shutdown the server
       command: /sbin/shutdown -h now

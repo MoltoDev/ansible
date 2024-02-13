@@ -1,0 +1,13 @@
+---
+- name: Restart Ubuntu Servers
+  hosts: your_server_group
+  become: yes
+
+  tasks:
+    - name: Ensure all packages are up to date
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Restart the server
+      command: shutdown -r now
