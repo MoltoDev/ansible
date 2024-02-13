@@ -1,6 +1,6 @@
 ---
 - name: Restart Ubuntu Servers
-  hosts: your_server_group
+  hosts: all
   become: yes
 
   tasks:
