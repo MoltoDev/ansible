@@ -5,7 +5,7 @@
   tasks:
     - name: Make HTTP request
       uri:
-        url: http://192.168.10.147:2096/api/test
+        url: https://192.168.10.147:2096/api/test
         method: GET
       register: response
 
