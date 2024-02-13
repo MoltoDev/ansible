@@ -1,0 +1,19 @@
+---
+- name: Check HTTP response
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Make HTTP request
+      uri:
+        url: http://192.168.10.147:3010/api/test
+        method: GET
+      register: response
+
+    - name: Check response status
+      fail:
+        msg: "HTTP request failed or did not receive 'Yarp' status."
+      when: response.status != 200 or response.json.status != "Yarp"
+
+    - name: Print response
+      debug:
+        var: response.json
