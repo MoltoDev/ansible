@@ -22,6 +22,7 @@
     - name: Calculate Total Disk Space Used (%)
       set_fact:
         disk_space_used_percent: "{{ (disk_used.stdout | int / disk_total.stdout | int) * 100 | round(2) }}"
+      when: disk_total.stdout | int > 0
 
     - name: Usage Stats
       debug:
