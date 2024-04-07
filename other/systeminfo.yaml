@@ -19,9 +19,9 @@
       shell: "df -h / | awk 'NR==2{print $2}'"
       register: disk_total
 
-    - name: Calculate Total Disk Space Used (%)
+    - name: Calculate Remaining Disk Space (%)
       set_fact:
-        disk_space_used_percent: "{{ (disk_used.stdout | int / disk_total.stdout | int) * 100 | round(2) }}"
+        disk_space_remaining_percent: "{{ ((disk_total.stdout | int - disk_used.stdout | int) / disk_total.stdout | int) * 100 | round(2) }}"
       when: disk_total.stdout | int > 0
 
     - name: Usage Stats
@@ -32,5 +32,4 @@
           - "RAM Usage: {{ ram_usage.stdout }}%"
           - "Disk Space Used: {{ disk_used.stdout }}"
           - "Total Disk Space: {{ disk_total.stdout }}"
-          - "Total Disk Space Used (%): {{ disk_space_used_percent }}%"
-      when: disk_space_used_percent is defined
+          - "Remaining Disk Space (%): {{ disk_space_remaining_percent }}%"
