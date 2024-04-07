@@ -12,12 +12,15 @@
       register: ram_usage
 
     - name: Gather Disk Space Usage
-      shell: "df -h / | awk 'NR==2{print $3}'"
+      shell: df -h / | awk 'NR==2{print $3}'
       register: disk_used
 
     - name: Gather Total Disk Space
-      shell: "df -h / | awk 'NR==2{print $2}'"
+      shell: df -h / | awk 'NR==2{print $2}'
       register: disk_total
+
+    - debug:
+        msg: "Disk Used: {{ disk_used.stdout }}, Disk Total: {{ disk_total.stdout }}"
 
     - name: Calculate Disk Space Used Percentage
       set_fact:
