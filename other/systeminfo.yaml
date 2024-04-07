@@ -12,23 +12,12 @@
       register: ram_usage
 
     - name: Gather Disk Space Usage
-      shell: df -h / | awk 'NR==2{print $3}'
+      shell: "df -h / | awk 'NR==2{print $3}'"
       register: disk_used
 
     - name: Gather Total Disk Space
-      shell: df -h / | awk 'NR==2{print $2}'
+      shell: "df -h / | awk 'NR==2{print $2}'"
       register: disk_total
-
-    - debug:
-        msg: "Disk Used: {{ disk_used.stdout }}, Disk Total: {{ disk_total.stdout }}"
-
-    - name: Calculate Disk Space Used Percentage
-      set_fact:
-        disk_space_percent: "{{ (disk_used.stdout | float / disk_total.stdout | float) * 100 | round(2) }}"
-      
-    - name: Convert Disk Space Used to Gigabytes
-      set_fact:
-        disk_used_gb: "{{ (disk_used.stdout | float / 1024) | round(2) }}GB"
 
     - name: Usage Stats
       debug:
@@ -36,6 +25,5 @@
           - "Executed On: {{ ansible_date_time.date }} {{ ansible_date_time.hour }}:{{ ansible_date_time.minute }}"
           - "CPU Usage: {{ cpu_usage.stdout }}%"
           - "RAM Usage: {{ ram_usage.stdout }}%"
-          - "Disk Space Used: {{ disk_used.stdout }} ({{ disk_used_gb }})"
+          - "Disk Space Used: {{ disk_used.stdout }}"
           - "Total Disk Space: {{ disk_total.stdout }}"
-          - "Disk Space Used Percentage: {{ disk_space_percent }}%"
